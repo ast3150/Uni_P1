@@ -1,0 +1,641 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504
+{\fonttbl\f0\fmodern\fcharset0 Courier-Oblique;\f1\fmodern\fcharset0 Courier;\f2\fmodern\fcharset0 Courier-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red64\green128\blue128;\red64\green128\blue128;\red0\green128\blue0;
+\red0\green0\blue255;\red102\green102\blue102;\red176\green0\blue64;\red125\green144\blue41;\red186\green33\blue33;
+}
+{\*\expandedcolortbl;\csgray\c100000;\csgenericrgb\c25098\c50196\c50196;\csgenericrgb\c25098\c50196\c50196;\csgenericrgb\c0\c50196\c0;
+\csgenericrgb\c0\c0\c100000;\csgenericrgb\c40000\c40000\c40000;\csgenericrgb\c69020\c0\c25098;\csgenericrgb\c49020\c56471\c16078;\csgenericrgb\c72941\c12941\c12941;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww33400\viewh19580\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\i\fs20 \cf2 /* ************************************************************************* *\\\
+*                Programmierung 1 HS 2016 - Serie 2-1                         * \
+\\* ************************************************************************* */\cf3 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf3 \
+/*\
+* @Author:        Alain Stulz\
+* @Matriculation: 16-119-414\
+* @Author:        Pascal Wallimann\
+* @Matriculation: 16-100-802\
+* @Date created:  2016-10-07 12:38:15\
+*/
+\f1\i0 \cf0 \
+\
+
+\f2\b \cf4 import
+\f1\b0 \cf0  
+\f2\b \cf5 java.text.DecimalFormat
+\f1\b0 \cf6 ;\cf0 \
+
+\f2\b \cf4 import
+\f1\b0 \cf0  
+\f2\b \cf5 java.util.Random
+\f1\b0 \cf6 ;\cf0 \
+\
+
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 class
+\f1\b0 \cf0  
+\f2\b \cf5 RandomISBN
+\f1\b0 \cf0  \cf6 \{\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  \cf7 void\cf0  \cf5 main\cf6 (\cf0  String args\cf6 []\cf0  \cf6 )\cf0  \cf6 \{\cf0 \
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "1st ISBN: "\cf0  \cf6 +\cf0  makeISBN\cf6 ());\cf0 \
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "2nd ISBN: "\cf0  \cf6 +\cf0  makeISBN\cf6 ());\cf0 \
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "3rd ISBN: "\cf0  \cf6 +\cf0  makeISBN\cf6 ());\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f0\i \cf3 /** generates and returns a random ISBN in the format XX-XXX-XX-C */
+\f1\i0 \cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  String \cf5 makeISBN\cf6 ()\cf0  \cf6 \{\cf0 \
+		
+\f0\i \cf3 // Do NOT change the declaration of the following variables!\
+
+\f1\i0 \cf0 		String laendercode\cf6 ;\cf0 \
+		String bandnr\cf6 ;\cf0 \
+		String verlagsnr\cf6 ;\cf0 \
+		String checksum\cf6 ;\cf0 \
+		\cf7 int\cf0  checksumInt\cf6 ;\cf0 \
+\
+		Random randomizer \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  java\cf6 .\cf8 util\cf6 .\cf8 Random\cf6 ();\cf0 \
+		DecimalFormat normalF \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  DecimalFormat\cf6 (\cf9 "#00"\cf6 );\cf0 \
+		DecimalFormat checksumF \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  DecimalFormat\cf6 (\cf9 "0"\cf6 );\cf0 \
+\
+		laendercode \cf6 =\cf0  normalF\cf6 .\cf8 format\cf6 (\cf0 randomizer\cf6 .\cf8 nextInt\cf6 (99));\cf0 \
+		bandnr \cf6 =\cf0  normalF\cf6 .\cf8 format\cf6 (\cf0 randomizer\cf6 .\cf8 nextInt\cf6 (899)+100);\cf0 \
+		verlagsnr \cf6 =\cf0  normalF\cf6 .\cf8 format\cf6 (\cf0 randomizer\cf6 .\cf8 nextInt\cf6 (99));\cf0 \
+\
+		checksumInt \cf6 =\cf0  hashOp\cf6 ((\cf7 int\cf6 )\cf0 laendercode\cf6 .\cf8 charAt\cf6 (0))\cf0  \cf6 +\cf0  \cf6 (\cf7 int\cf6 )\cf0 laendercode\cf6 .\cf8 charAt\cf6 (1);\cf0 \
+		checksumInt \cf6 +=\cf0  hashOp\cf6 ((\cf7 int\cf6 )\cf0 bandnr\cf6 .\cf8 charAt\cf6 (0))\cf0  \cf6 +\cf0  \cf6 (\cf7 int\cf6 )\cf0 bandnr\cf6 .\cf8 charAt\cf6 (1)\cf0  \cf6 +\cf0  hashOp\cf6 ((\cf7 int\cf6 )\cf0 bandnr\cf6 .\cf8 charAt\cf6 (2));\cf0 \
+		checksumInt \cf6 +=\cf0  \cf6 (\cf7 int\cf6 )\cf0 verlagsnr\cf6 .\cf8 charAt\cf6 (0)\cf0  \cf6 +\cf0  hashOp\cf6 ((\cf7 int\cf6 )\cf0 verlagsnr\cf6 .\cf8 charAt\cf6 (1));\cf0 \
+		checksumInt \cf6 %=\cf0  \cf6 10;\cf0 \
+		checksum \cf6 =\cf0  checksumF\cf6 .\cf8 format\cf6 (\cf0 checksumInt\cf6 );\cf0 \
+		\
+		
+\f0\i \cf3 // Do not change the following line\
+
+\f1\i0 \cf0 		
+\f2\b \cf4 return
+\f1\b0 \cf0  laendercode \cf6 +\cf0  \cf9 "-"\cf0  \cf6 +\cf0  bandnr \cf6 +\cf0  \cf9 "-"\cf0  \cf6 +\cf0  verlagsnr \cf6 +\cf0  \cf9 "-"\cf0  \cf6 +\cf0  checksum\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f0\i \cf3 /** multiplies i with 2 and subtracts 9 if result is >= 10 */
+\f1\i0 \cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  \cf7 int\cf0  \cf5 hashOp\cf6 (\cf0  \cf7 int\cf0  i \cf6 )\cf0  \cf6 \{\cf0 \
+		
+\f0\i \cf3 // Do NOT change this method!\
+
+\f1\i0 \cf0 		\cf7 int\cf0  doubled \cf6 =\cf0  \cf6 2\cf0  \cf6 *\cf0  i\cf6 ;\cf0 \
+		
+\f2\b \cf4 if
+\f1\b0 \cf0  \cf6 (\cf0  doubled \cf6 >=\cf0  \cf6 10\cf0  \cf6 )\cf0  \cf6 \{\cf0 \
+			doubled \cf6 =\cf0  doubled \cf6 -\cf0  \cf6 9;\cf0 \
+		\cf6 \}\cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  doubled\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\cf6 \}\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\i \cf3 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 /* ************************************************************************* *\\\
+*                Programmierung 1 HS 2016 - Serie 2-2                         * \
+\\* ************************************************************************* */
+\f1\i0 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\i \cf3 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf3 /*\
+* @Author:        Alain Stulz\
+* @Matriculation: 16-119-414\
+* @Author:        Pascal Wallimann\
+* @Matriculation: 16-100-802\
+* @Date created:  2016-10-19 15:44:17\
+*/
+\f1\i0 \cf0 \
+\
+
+\f2\b \cf4 import
+\f1\b0 \cf0  
+\f2\b \cf5 java.util.Date
+\f1\b0 \cf6 ;\cf0 \
+
+\f2\b \cf4 import
+\f1\b0 \cf0  
+\f2\b \cf5 java.util.Scanner
+\f1\b0 \cf6 ;\cf0 \
+
+\f2\b \cf4 import
+\f1\b0 \cf0  
+\f2\b \cf5 java.text.*
+\f1\b0 \cf6 ;\cf0 \
+\
+
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 class
+\f1\b0 \cf0  
+\f2\b \cf5 Book
+\f1\b0 \cf0 \
+\cf6 \{\cf0 \
+	
+\f2\b \cf4 private
+\f1\b0 \cf0  \cf7 int\cf0  id\cf6 ;\cf0 \
+	
+\f2\b \cf4 private
+\f1\b0 \cf0  String title\cf6 ;\cf0 \
+	
+\f2\b \cf4 private
+\f1\b0 \cf0  String author\cf6 ;\cf0 \
+	
+\f2\b \cf4 private
+\f1\b0 \cf0  Date dateOfPublication\cf6 ;\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  
+\f2\b \cf4 final
+\f1\b0 \cf0  String DATE_FORMAT \cf6 =\cf0  \cf9 "dd.MM.yyyy"\cf6 ;\cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  
+\f2\b \cf4 final
+\f1\b0 \cf0  \cf7 long\cf0  MSEC_PER_DAY \cf6 =\cf0  \cf6 86400000;\cf0 \
+\
+	
+\f0\i \cf3 //--- constructors ---\
+
+\f1\i0 \cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  \cf5 Book\cf6 (\cf7 int\cf0  id\cf6 ,\cf0  String title\cf6 ,\cf0  String author\cf6 ,\cf0  Date dateOfPublication\cf6 )\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 id\cf0  \cf6 =\cf0  id\cf6 ;\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 title\cf0  \cf6 =\cf0  title\cf6 ;\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 author\cf0  \cf6 =\cf0  author\cf6 ;\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 dateOfPublication\cf0  \cf6 =\cf0  dateOfPublication\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f0\i \cf3 /** Returns the age of the book in days since publication */
+\f1\i0 \cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  \cf7 int\cf0  \cf5 age\cf6 ()\cf0 \
+	\cf6 \{\cf0 \
+		Date currentDate \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  Date\cf6 ();\cf0 \
+		\cf7 long\cf0  timeDifference \cf6 =\cf0  currentDate\cf6 .\cf8 getTime\cf6 ()\cf0  \cf6 -\cf0  dateOfPublication\cf6 .\cf8 getTime\cf6 ();\cf0 \
+		\cf7 long\cf0  daysSincePublication \cf6 =\cf0  timeDifference \cf6 /\cf0  MSEC_PER_DAY\cf6 ;\cf0 \
+\
+		
+\f0\i \cf3 // Question: Are we allowed to import and use TimeUnit?\
+
+\f1\i0 \cf0 		
+\f0\i \cf3 // Because then we could do it like this:\
+
+\f1\i0 \cf0 		
+\f0\i \cf3 // TimeUnit.MILLISECONDS.toDays(timeDifference);\
+
+\f1\i0 \cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  \cf6 (\cf7 int\cf6 )\cf0 daysSincePublication\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f0\i \cf3 /** Returns a String representation of the book */
+\f1\i0 \cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  String \cf5 toString\cf6 ()\cf0 \
+	\cf6 \{\cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  id \cf6 +\cf0  \cf9 ", "\cf0  \cf6 +\cf0  title \cf6 +\cf0  \cf9 ", "\cf0  \cf6 +\cf0  author \cf6 +\cf0  \cf9 ", "\cf0  \cf6 +\cf0  dateToString\cf6 (\cf0 dateOfPublication\cf6 );\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f0\i \cf3 /** Reads all book data from user input */
+\f1\i0 \cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  \cf7 void\cf0  \cf5 input\cf6 ()\cf0  \
+	\cf6 \{\cf0 \
+		Scanner scn \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  Scanner\cf6 (\cf0  System\cf6 .\cf8 in\cf0  \cf6 );\cf0 \
+\
+		System\cf6 .\cf8 out\cf6 .\cf8 print\cf6 (\cf0  \cf9 "\\tPlease enter id: "\cf0  \cf6 );\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 id\cf0  \cf6 =\cf0  scn\cf6 .\cf8 nextInt\cf6 ();\cf0 \
+\
+		System\cf6 .\cf8 out\cf6 .\cf8 print\cf6 (\cf0  \cf9 "\\tPlease enter title: "\cf0  \cf6 );\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 title\cf0  \cf6 =\cf0  scn\cf6 .\cf8 next\cf6 ();\cf0 \
+\
+		System\cf6 .\cf8 out\cf6 .\cf8 print\cf6 (\cf0  \cf9 "\\tPlease enter author: "\cf0  \cf6 );\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 author\cf0  \cf6 =\cf0  scn\cf6 .\cf8 next\cf6 ();\cf0 \
+\
+		System\cf6 .\cf8 out\cf6 .\cf8 print\cf6 (\cf0  \cf9 "\\tPlease enter date of publication (in form 'dd.MM.yyyy'): "\cf0  \cf6 );\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 dateOfPublication\cf0  \cf6 =\cf0  stringToDate\cf6 (\cf0 scn\cf6 .\cf8 next\cf6 ());\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f0\i \cf3 //--- Get-/Set-methods ---\
+
+\f1\i0 \cf0 	\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  \cf7 int\cf0  \cf5 getID\cf6 ()\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  id\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  \cf7 void\cf0  \cf5 setID\cf6 (\cf7 int\cf0  id\cf6 )\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 id\cf0  \cf6 =\cf0  id\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  String \cf5 getTitle\cf6 ()\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  title\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  \cf7 void\cf0  \cf5 setTitle\cf6 (\cf0 String title\cf6 )\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 title\cf0  \cf6 =\cf0  title\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  String \cf5 getAuthor\cf6 ()\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  author\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  \cf7 void\cf0  \cf5 setAuthor\cf6 (\cf0 String author\cf6 )\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 author\cf0  \cf6 =\cf0  author\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  Date \cf5 getDateOfPublication\cf6 ()\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  dateOfPublication\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  \cf7 void\cf0  \cf5 setDateOfPublication\cf6 (\cf0 Date dateOfPublication\cf6 )\cf0  \cf6 \{\cf0 \
+		
+\f2\b \cf4 this
+\f1\b0 \cf6 .\cf8 dateOfPublication\cf0  \cf6 =\cf0  dateOfPublication\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f0\i \cf3 //--- helper methods -- DO NOT CHANGE ------------------------------------\
+
+\f1\i0 \cf0 	
+\f0\i \cf3 /** Converts the Date object d into a String object */
+\f1\i0 \cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  String \cf5 dateToString\cf6 (\cf0  Date d \cf6 )\cf0 \
+	\cf6 \{\cf0 \
+		SimpleDateFormat fmt \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  SimpleDateFormat\cf6 (\cf0  DATE_FORMAT \cf6 );\cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  fmt\cf6 .\cf8 format\cf6 (\cf0  d \cf6 );\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f0\i \cf3 /** Converts the String object s into a Date object */
+\f1\i0 \cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  Date \cf5 stringToDate\cf6 (\cf0  String s \cf6 )\cf0  \
+	\cf6 \{\cf0 \
+		Date r \cf6 =\cf0  
+\f2\b \cf4 null
+\f1\b0 \cf6 ;\cf0 \
+		
+\f2\b \cf4 try
+\f1\b0 \cf0  \cf6 \{\cf0 \
+			SimpleDateFormat fmt \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  SimpleDateFormat\cf6 (\cf0  DATE_FORMAT \cf6 );\cf0 \
+			r \cf6 =\cf0  fmt\cf6 .\cf8 parse\cf6 (\cf0  s \cf6 );\cf0 \
+		\cf6 \}\cf0  
+\f2\b \cf4 catch
+\f1\b0 \cf0  \cf6 (\cf0  ParseException e \cf6 )\{\cf0 \
+			System\cf6 .\cf8 err\cf6 .\cf8 println\cf6 (\cf0  e \cf6 );\cf0 \
+			System\cf6 .\cf8 exit\cf6 (1);\cf0 \
+		\cf6 \}\cf0 \
+		
+\f2\b \cf4 return
+\f1\b0 \cf0  r\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\cf6 \}\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\i \cf3 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf3 /*\
+* @Author:        Alain Stulz\
+* @Matriculation: 16-119-414\
+* @Author:        Pascal Wallimann\
+* @Matriculation: 16-100-802\
+* @Date created:  2016-10-19 15:50:06\
+*/
+\f1\i0 \cf0 \
+\
+
+\f0\i \cf3 /* *************** */
+\f1\i0 \cf0 \
+
+\f0\i \cf3 // NOTE: To test properly, you need to enable assertions, \
+// for example by running `java -ea BookTest` (note the -ea parameter) from command line\
+/* *************** */
+\f1\i0 \cf0 \
+\
+
+\f2\b \cf4 import
+\f1\b0 \cf0  
+\f2\b \cf5 java.util.Date
+\f1\b0 \cf6 ;\cf0 \
+
+\f2\b \cf4 import
+\f1\b0 \cf0  
+\f2\b \cf5 java.util.Scanner
+\f1\b0 \cf6 ;\cf0 \
+
+\f2\b \cf4 import
+\f1\b0 \cf0  
+\f2\b \cf5 java.text.*
+\f1\b0 \cf6 ;\cf0 \
+\
+
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 class
+\f1\b0 \cf0  
+\f2\b \cf5 BookTest
+\f1\b0 \cf0  \cf6 \{\cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  \cf7 void\cf0  \cf5 main\cf6 (\cf0 String\cf6 []\cf0  args\cf6 )\cf0  \cf6 \{\cf0 \
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 ""\cf6 );\cf0 \
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "Beginning tests..."\cf6 );\cf0 \
+		\
+		
+\f2\b \cf4 if
+\f1\b0 \cf0  \cf6 (!\cf0 areAssertsEnabled\cf6 ())\cf0  \cf6 \{\cf0 \
+			System\cf6 .\cf8 err\cf6 .\cf8 println\cf6 (\cf0  \cf9 "WARNING: Assertions are not enabled. Try running with `-ea` argument, like: `java -ea BookTest`"\cf6 );\cf0 \
+		\cf6 \}\cf0 \
+\
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 ""\cf6 );\cf0 \
+\
+		
+\f0\i \cf3 // given\
+
+\f1\i0 \cf0 		\cf7 int\cf0  testID \cf6 =\cf0  \cf6 123;\cf0 \
+		String testTitle \cf6 =\cf0  \cf9 "Die Blechtrommel"\cf6 ;\cf0 \
+		String testAuthor \cf6 =\cf0  \cf9 "G\'fcnter Grass"\cf6 ;\cf0 \
+		Date testPublicationDate \cf6 =\cf0  Book\cf6 .\cf8 stringToDate\cf6 (\cf9 "12.02.1969"\cf6 );\cf0 \
+\
+		Book testBook \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  Book\cf6 (\cf0 testID\cf6 ,\cf0  testTitle\cf6 ,\cf0  testAuthor\cf6 ,\cf0  testPublicationDate\cf6 );\cf0 \
+		\
+		
+\f0\i \cf3 // when\
+
+\f1\i0 \cf0 		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "Testing methods..."\cf6 );\cf0 \
+\
+		\cf7 int\cf0  testedAge \cf6 =\cf0  testBook\cf6 .\cf8 age\cf6 ();\cf0 \
+		\
+		String testedString \cf6 =\cf0  testBook\cf6 .\cf8 toString\cf6 ();\cf0 \
+		\
+		testBook\cf6 .\cf8 setID\cf6 (100);\cf0 \
+		\cf7 int\cf0  testedID \cf6 =\cf0  testBook\cf6 .\cf8 getID\cf6 ();\cf0 \
+\
+		testBook\cf6 .\cf8 setTitle\cf6 (\cf9 "Java For Dummies"\cf6 );\cf0 \
+		String testedTitle \cf6 =\cf0  testBook\cf6 .\cf8 getTitle\cf6 ();\cf0 \
+\
+		testBook\cf6 .\cf8 setAuthor\cf6 (\cf9 "Barry A. Burd"\cf6 );\cf0 \
+		String testedAuthor \cf6 =\cf0  testBook\cf6 .\cf8 getAuthor\cf6 ();\cf0 \
+\
+		Date testSetterPublicationDate \cf6 =\cf0  testBook\cf6 .\cf8 stringToDate\cf6 (\cf9 "31.03.2014"\cf6 );\cf0 \
+		testBook\cf6 .\cf8 setDateOfPublication\cf6 (\cf0 testSetterPublicationDate\cf6 );\cf0 \
+		Date testedPublicationDate \cf6 =\cf0  testBook\cf6 .\cf8 getDateOfPublication\cf6 ();\cf0 \
+\
+		
+\f0\i \cf3 // then\
+
+\f1\i0 \cf0 		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "\\tAge: "\cf0  \cf6 +\cf0  testedAge \cf6 +\cf0  \cf9 "  Date:  "\cf0  \cf6 +\cf0  Book\cf6 .\cf8 dateToString\cf6 (\cf0 testPublicationDate\cf6 ));\cf0 \
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 ""\cf6 );\cf0 \
+\
+		
+\f2\b \cf4 assert
+\f1\b0 \cf0  testedString\cf6 .\cf8 equals\cf6 (\cf9 "123, Die Blechtrommel, G\'fcnter Grass, 12.02.1969"\cf6 )\cf0  \cf6 :\cf0  \cf9 "Book.toString() failed"\cf6 ;\cf0 \
+		
+\f2\b \cf4 assert
+\f1\b0 \cf0  testedID \cf6 ==\cf0  \cf6 100\cf0  \cf6 :\cf0  \cf9 "Book.setID() or Book.getID() failed"\cf6 ;\cf0 \
+		
+\f2\b \cf4 assert
+\f1\b0 \cf0  testedTitle\cf6 .\cf8 equals\cf6 (\cf9 "Java For Dummies"\cf6 )\cf0  \cf6 :\cf0  \cf9 "Book.setTitle() or Book.getTitle() failed"\cf6 ;\cf0 \
+		
+\f2\b \cf4 assert
+\f1\b0 \cf0  testedAuthor\cf6 .\cf8 equals\cf6 (\cf9 "Barry A. Burd"\cf6 )\cf0  \cf6 :\cf0  \cf9 "Book.setAuthor() or Book.getAuthor() failed"\cf6 ;\cf0 \
+		
+\f2\b \cf4 assert
+\f1\b0 \cf0  testedPublicationDate\cf6 .\cf8 equals\cf6 (\cf0 testSetterPublicationDate\cf6 )\cf0  \cf6 :\cf0  \cf9 "Book.setDateOfPublication() or Book.getDateOfPublication() failed"\cf6 ;\cf0 \
+\
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "Testing input feature..."\cf6 );\cf0 \
+\
+		testBook\cf6 .\cf8 input\cf6 ();\cf0 \
+\
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "Book has values:\\n\\t"\cf0  \cf6 +\cf0  testBook\cf6 .\cf8 toString\cf6 ());\cf0 \
+\
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 "Ran all tests successfully."\cf6 );\cf0 \
+		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf9 ""\cf6 );\cf0 \
+	\cf6 \}\cf0 \
+\
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  \cf7 boolean\cf0  \cf5 areAssertsEnabled\cf6 ()\cf0  \cf6 \{\cf0 \
+ 		\cf7 boolean\cf0  assertsEnabled \cf6 =\cf0  
+\f2\b \cf4 false
+\f1\b0 \cf6 ;\cf0 \
+  		
+\f2\b \cf4 assert
+\f1\b0 \cf0  assertsEnabled \cf6 =\cf0  
+\f2\b \cf4 true
+\f1\b0 \cf6 ;\cf0 \
+  		
+\f2\b \cf4 return
+\f1\b0 \cf0  assertsEnabled\cf6 ;\cf0 \
+	\cf6 \}\cf0 \
+\cf6 \}\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\i \cf3 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 /* ************************************************************************* *\\\
+*                Programmierung 1 HS 2016 - Serie 2-3                        * \
+\\* ************************************************************************* */\cf3 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf3 \
+/*\
+ * @Author:        Alain Stulz\
+ * @Matriculation: 16-119-414\
+ * @Author:        Pascal Wallimann\
+ * @Matriculation: 16-100-802\
+ * @Date created:  2016-10-19 15:50:06\
+ */
+\f1\i0 \cf0 \
+\
+
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 class
+\f1\b0 \cf0  
+\f2\b \cf5 B
+\f1\b0 \cf0  \cf6 \{\cf0 \
+	
+\f2\b \cf4 public
+\f1\b0 \cf0  
+\f2\b \cf4 static
+\f1\b0 \cf0  \cf7 void\cf0  \cf5 main\cf6 (\cf0 String args\cf6 [])\{\cf0 \
+\
+		A a1 \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  A\cf6 ();\cf0  
+\f0\i \cf3 // Create an instance a1 of A\
+
+\f1\i0 \cf0 		A a2 \cf6 =\cf0  
+\f2\b \cf4 new
+\f1\b0 \cf0  A\cf6 ();\cf0  
+\f0\i \cf3 // Create another instance a2 of A\
+
+\f1\i0 \cf0 		a1\cf6 .\cf8 increment\cf6 ();\cf0  
+\f0\i \cf3 // Set counter in a1 to 4\
+
+\f1\i0 \cf0 		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf0 a1\cf6 +\cf9 "/"\cf6 +\cf0 a2\cf6 );\cf0 \
+		
+\f0\i \cf3 // Prints 4/3 because a1 and a2 refer to different objects\
+
+\f1\i0 \cf0 \
+		a2 \cf6 =\cf0  a1\cf6 ;\cf0  
+\f0\i \cf3 // Makes a2 point to same place as a1, a2 and a1 now referencing same object\
+
+\f1\i0 \cf0 		a2\cf6 .\cf8 increment\cf6 ();\cf0   
+\f0\i \cf3 // Set counter (of a2, thus a1) to 5\
+
+\f1\i0 \cf0 		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf0 a1\cf6 +\cf9 "/"\cf6 +\cf0 a2\cf6 );\cf0  \
+		
+\f0\i \cf3 // Prints 5/5 because a1 and a2 refer to the same object, thus both have been increased\
+
+\f1\i0 \cf0 \
+		String s1 \cf6 =\cf0  \cf9 "ROCK"\cf6 ;\cf0  
+\f0\i \cf3 // Creates an instance s1 of string literal\
+
+\f1\i0 \cf0 		String s2 \cf6 =\cf0  s1\cf6 ;\cf0  
+\f0\i \cf3 // Creates another string with same value but different location in memory\
+
+\f1\i0 \cf0 		s2 \cf6 =\cf0  s2\cf6 .\cf8 toLowerCase\cf6 ();\cf0  
+\f0\i \cf3 // Lowercases s2 (ROCK -> rock)\
+
+\f1\i0 \cf0 		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf0 s1\cf6 +\cf9 "/"\cf6 +\cf0 s2\cf6 );\cf0 \
+		
+\f0\i \cf3 // Prints "ROCK/rock" because only the second instance has been modified, first one stays the same\
+
+\f1\i0 \cf0 \
+		\cf7 int\cf0  j\cf6 =1;\cf0  
+\f0\i \cf3 // Creates an instance j of int literal 1\
+
+\f1\i0 \cf0 		\cf7 int\cf0  i\cf6 =\cf0 j\cf6 ;\cf0  
+\f0\i \cf3 // Creates an instance i with same value as j but different location in memory\
+
+\f1\i0 \cf0 		j\cf6 ++;\cf0  
+\f0\i \cf3 // Increases j to 2\
+
+\f1\i0 \cf0 		System\cf6 .\cf8 out\cf6 .\cf8 println\cf6 (\cf0 j\cf6 +\cf9 "/"\cf6 +\cf0 i\cf6 );\cf0 \
+		
+\f0\i \cf3 // Prints 2/1 because j and i are again different objects and only one is modified\
+
+\f1\i0 \cf0 	\cf6 \}\cf0  \
+\cf6 \}\cf0 \
+}

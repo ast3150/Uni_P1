@@ -56,24 +56,23 @@ public class Book
 	/** Reads all book data from user input */
 	public void input() 
 	{
-		Scanner scn = new Scanner( System.in );
-
+		Scanner intScn = new Scanner( System.in );
+        Scanner scn = new Scanner( System.in );
+        
 		System.out.print( "\tPlease enter id: " );
-		this.id = scn.nextInt();
+		this.id = intScn.nextInt();
 
 		System.out.print( "\tPlease enter title: " );
-		this.title = scn.next();
+		this.title = scn.nextLine();
 
 		System.out.print( "\tPlease enter author: " );
-		this.author = scn.next();
+		this.author = scn.nextLine();
 
 		System.out.print( "\tPlease enter date of publication (in form 'dd.MM.yyyy'): " );
-		this.dateOfPublication = stringToDate(scn.next());
+		this.dateOfPublication = stringToDate(scn.nextLine());
 	}
 
 	//--- Get-/Set-methods ---
-
-	// TODO: Insert your code here!
 	
 	public int getID() {
 		return id;
