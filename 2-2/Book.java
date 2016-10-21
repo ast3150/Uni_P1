@@ -57,7 +57,7 @@ public class Book
 	public void input() 
 	{
 		Scanner intScn = new Scanner( System.in );
-        Scanner scn = new Scanner( System.in );
+		Scanner scn = new Scanner( System.in );
         
 		System.out.print( "\tPlease enter id: " );
 		this.id = intScn.nextInt();
