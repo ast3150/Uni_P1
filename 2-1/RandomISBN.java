@@ -38,9 +38,9 @@ public class RandomISBN {
 		bandnr = normalF.format(randomizer.nextInt(899)+100);
 		verlagsnr = normalF.format(randomizer.nextInt(99));
 
-		checksumInt = hashOp((int)laendercode.charAt(0)) + (int)laendercode.charAt(1);
-		checksumInt += hashOp((int)bandnr.charAt(0)) + (int)bandnr.charAt(1) + hashOp((int)bandnr.charAt(2));
-		checksumInt += (int)verlagsnr.charAt(0) + hashOp((int)verlagsnr.charAt(1));
+		checksumInt = hashOp(Character.getNumericValue(laendercode.charAt(0))) + Character.getNumericValue(laendercode.charAt(1));
+		checksumInt += hashOp(Character.getNumericValue(bandnr.charAt(0))) + Character.getNumericValue(bandnr.charAt(1)) + hashOp(Character.getNumericValue((int)bandnr.charAt(2)));
+		checksumInt += Character.getNumericValue(verlagsnr.charAt(0)) + hashOp(Character.getNumericValue(verlagsnr.charAt(1)));
 		checksumInt %= 10;
 		checksum = checksumF.format(checksumInt);
 		
