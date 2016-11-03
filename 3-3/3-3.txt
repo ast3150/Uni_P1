@@ -1,0 +1,32 @@
+// 1
+
+Prints:
+a=0, b=1
+a=1, b=1
+
+// 2
+int i=1; 
+while(i<10){
+	i++;
+	System.out.println(i); 
+}
+
+int j=1;
+do {
+	j++;
+	System.out.println(j);
+} while (j < 10);
+
+for (int k = 1; k < 10; k++) {
+	System.out.println(k+1);
+}
+
+// 3
+/*
+	Wenn das Argument `limit` nicht aus der Dreierreihe ist, 
+	entsteht eine Endlosschleife, da die Bedingung für das Abbrechen
+	der for-Schleife nie erreicht wird.
+
+	Das Problem wird vom Compiler nicht bemerkt, würde
+	also zur Runtime auftreten.
+ */

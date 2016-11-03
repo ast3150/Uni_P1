@@ -68,8 +68,7 @@ public class GuessOrc {
 		// Setup
 		System.out.print(this.generateOrcIntroScreen());
 		this.printMap(NO_MOVE_MADE, NO_HINT);
-		mineShaftId = generator.nextInt(MINE_SHAFTS-1);
-
+		mineShaftId = generator.nextInt(MINE_SHAFTS);
 		play();
 	}
 
