@@ -115,7 +115,7 @@ public class GuessOrc {
 	public int calculateHint( int guessedMineShaftId ){
 		ArrayList<Integer> possibleHints = new ArrayList(0);
 
-		if ( java.lang.Math.abs(guessedMineShaftId - mineShaftId) >= 5 ) {
+		if ( java.lang.Math.abs(guessedMineShaftId - mineShaftId) > 5 ) {
 			// Very far away
 			possibleHints.add(4);
 		} else {

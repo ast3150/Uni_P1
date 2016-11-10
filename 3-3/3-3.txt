@@ -29,4 +29,6 @@ for (int k = 1; k < 10; k++) {
 
 	Das Problem wird vom Compiler nicht bemerkt, würde
 	also zur Runtime auftreten.
+
+	Man kann das Problem beheben, indem man die Abbruchbedingung zu `<=` ändert.
  */
