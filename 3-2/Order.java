@@ -13,9 +13,11 @@ public class Order {
 	private String customerName;
 	private String customerAddress;
 
-	// Sure we could do it with 5 separate book variables but this is cleaner anyway
-	private ArrayList<Book> books = new ArrayList(5);
 	private Book book1;
+	private Book book2;
+	private Book book3;
+	private Book book4;
+	private Book book5;
 
 	/** constructor */
 	public Order() {
@@ -28,36 +30,66 @@ public class Order {
 
 		str += "Order id: " + id + ", Customer: " + customerName + ", " + customerAddress;
 
-		for(Book book: books) {
-			str += "\n" + book.toString();
+		if (book1 != null) {
+			str += "\n" + book1.toString();
 		}
-		
+
+		if (book2 != null) {
+			str += "\n" + book2.toString();
+		}
+
+		if (book3 != null) {
+			str += "\n" + book3.toString();
+		}
+
+		if (book4 != null) {
+			str += "\n" + book4.toString();
+		}
+
+		if (book5 != null) {
+			str += "\n" + book5.toString();
+		}
+
 		str += "\nTotal price: " + getTotalPrice() + " CHF";
 		
 		return str;
 	}
 
 	public void addBook(Book book) {
-		
-		// If you would want to do this with instance variables instead of ArrayList,
-		// you could check each book whether it has a value 
-		// and assign to the first one that is empty.
-		// 
-		// Example:
-		// if (book1 == null) {
-		// 		book1 = book;
-		// }
-
-		if (books.size() < 5) {
-			this.books.add(book);
+		if (book1 == null) {
+			book1 = book;
+		} else if (book2 == null) {
+			book2 = book;
+		} else if (book3 == null) {
+			book3 = book;
+		} else if (book4 == null) {
+			book4 = book;
+		} else if (book5 == null) {
+			book5 = book;
 		}
 	}
 
 	public int getTotalPrice() {
 		int totalPrice = 0;
 
-		for(Book book: books) {
-    		totalPrice += book.getPrice();
+		if (book1 != null) {
+	    	totalPrice += book1.getPrice();
+		}
+
+		if (book2 != null) {
+    		totalPrice += book2.getPrice();
+		}
+
+		if (book3 != null) {
+	    	totalPrice += book3.getPrice();
+		}
+
+		if (book4 != null) {
+    		totalPrice += book4.getPrice();
+		}
+
+		if (book5 != null) {
+    		totalPrice += book5.getPrice();
 		}
 
 		return totalPrice;
