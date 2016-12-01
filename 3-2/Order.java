@@ -55,7 +55,11 @@ public class Order {
 		return str;
 	}
 
-	public void addBook(Book book) {
+	public void addBook(final Book book) {
+		if (book == null) {
+			throw new NullPointerException("Argument 'book' is null");
+		}
+
 		if (book1 == null) {
 			book1 = book;
 		} else if (book2 == null) {
