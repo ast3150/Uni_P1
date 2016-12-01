@@ -39,23 +39,23 @@ public class FileTest
 
 
 
-		// // ------------ Testing labelled files ------------
-		// // save addresses to a labelled file
-		// file = new AddressFileLabelled( "adr_out.txt" );  // note the usage of polymorphism!
-		// file.save( list );
-		// System.out.println( "\nSaved labelled file adr_out.txt.\n" );
+		// ------------ Testing labelled files ------------
+		// save addresses to a labelled file
+		file = new AddressFileLabelled( "adr_out.txt" );  // note the usage of polymorphism!
+		file.save( list );
+		System.out.println( "\nSaved labelled file adr_out.txt.\n" );
 
-		// // load addresses from a labelled file
-		// System.out.println( "Reading file addresses.txt..." );
-		// file = new AddressFileLabelled( "addresses.txt" );
-		// try {
-		// 	result = file.load();
-		// 	System.out.println( "Loaded the following objects:" );
-		// 	for ( Address adr : result )
-		// 		System.out.println( adr );
-		// 	System.out.println( "" );
-		// } catch ( AddressFileException e ) {
-		// 	System.out.println( "\nInvalid file.\n" );
-		// }
+		// load addresses from a labelled file
+		System.out.println( "Reading file addresses.txt..." );
+		file = new AddressFileLabelled( "addresses.txt" );
+		try {
+			result = file.load();
+			System.out.println( "Loaded the following objects:" );
+			for ( Address adr : result )
+				System.out.println( adr );
+			System.out.println( "" );
+		} catch ( AddressFileException e ) {
+			System.out.println( "\nInvalid file.\n" );
+		}
 	}
 }
