@@ -17,7 +17,7 @@ public class AddressFile {
 	}
 
     /// Converts Address to comma separated String
-	public String toLine(Address addr) {
+	private String toLine(Address addr) {
 		String addressStr = "";
 		addressStr += addr.getId() + ", ";
 		addressStr += addr.getName() + ", ";
@@ -29,7 +29,7 @@ public class AddressFile {
 	}
 
 	/// Tries to read an Address from a comma separated String
-	public Address parseLine(String line) throws AddressFileException {
+	private Address parseLine(String line) throws AddressFileException {
 		Scanner scn = new Scanner(line);
 		scn.useDelimiter(",");
 

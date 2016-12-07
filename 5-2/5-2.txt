@@ -1,0 +1,20 @@
+/*
+* @Author:        Pascal Wallimann
+* @Matriculation: 16-100-802
+* @Author:        Alain Stulz
+* @Matriculation: 16-119-414
+*/
+
+// 5-2
+
+Hello fram A
+A.foo
+A.foo
+
+Hello from B
+A.foo
+A.foo
+
+Hello from B
+C.foo
+C.foo

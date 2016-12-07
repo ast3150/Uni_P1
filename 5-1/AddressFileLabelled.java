@@ -16,7 +16,7 @@ public class AddressFileLabelled extends AddressFile {
 	}
 
     /// Converts Address to labeled, comma separated String
-	public String toLine(Address addr) {
+	private String toLine(Address addr) {
 		String addressStr = "";
 		addressStr += "id:" + addr.getId() + ", ";
 		addressStr += "name:" + addr.getName() + ", ";
@@ -28,7 +28,7 @@ public class AddressFileLabelled extends AddressFile {
 	}
 
 	/// Tries to read an Address from a labeled, comma separated String
-	public Address parseLine(String line) throws AddressFileException {
+	private Address parseLine(String line) throws AddressFileException {
 		Scanner scn = new Scanner(line);
 		String regEx = "[\\s]*:[\\s]*([^;]*)";
 
